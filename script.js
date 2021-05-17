@@ -1,6 +1,6 @@
 const api = {
     key: "3a15d44658d4796b1f1187beffaf104e",
-    base: "http://api.openweathermap.org/data/2.5/"
+    base: "https://api.openweathermap.org/data/2.5/"
 }
 
 const searchbox = document.querySelector('.search-box');
@@ -16,14 +16,14 @@ function getResults (query) {
     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then(weather => {
         return weather.json();
-    }).then(displayResults);
+        }).then(displayResults);
 }
 
 function displayResults (weather) {
     let city = document.querySelector('.location .city');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
 
-    let now = new date();
+    let now = new Date();
     let date = document.querySelector('.location .date');
     date.innerText = dateBuilder(now);
 
@@ -39,12 +39,12 @@ function displayResults (weather) {
 
 function dateBuilder (d) {
     let months =["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novemeber", "December"];
-let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-let day = days[d.getDay()];
-let date = d.getDate();
-let month = months[d.getMonth()];
-let year = d.getFullYear();
+    let day = days[d.getDay()];
+    let date = d.getDate();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear();
 
 return `${day} ${date} ${month} ${year}`;
 }
